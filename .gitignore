@@ -1,0 +1,9 @@
+./node_modules
+```
+I have tried to add the following to my .gitignore file:
+```
+
+node_modules
+node_modules/
+/dist
+./dist
