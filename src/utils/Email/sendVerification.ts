@@ -5,7 +5,7 @@ import { createTransport } from 'nodemailer';
 import { configure } from "./config.js";
 
 dotenv.config();
-export const VerifyEmail = async (email:string,name:string, code:number) => {
+export const VerifyEmail = async (email:string,name:string, code:string) => {
   console.log(name, email, code);
   const msg = {
     to: email,

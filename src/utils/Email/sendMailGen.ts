@@ -1,6 +1,6 @@
 import Mailgen from "mailgen";
 
-export const sendCredentials = (name:string, email:string, code:number) => {
+export const sendCredentials = (name:string, email:string, code:string) => {
   // Initialize Mailgen
   const mailGenerator = new Mailgen({
     theme: 'default',

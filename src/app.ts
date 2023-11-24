@@ -17,7 +17,7 @@ const app: Application = express();
 const port: number = Number(process.env.Port) || 8080;
 
 app.use(logger("dev"));
-app.use(logger(':method :url :status :res[content-length] - :response-time ms :user-agent'));
+// app.use(logger(':method :url :status :res[content-length] - :response-time ms :user-agent'));
 //middlewares
 app.use(express.json());
 

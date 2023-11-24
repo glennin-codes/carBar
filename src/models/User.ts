@@ -15,7 +15,7 @@ interface Iuser extends Document {
         default: Date;
     };
     isVerified:boolean;
-    verificationCode:number;
+    verificationCode:string;
     signupMethod:string;
 }
 
@@ -29,7 +29,7 @@ const userSchema = new Schema <Iuser>({
     location:{type:String,required:true},
     createdAt:{type:Date,default:Date.now},
     isVerified:{type:Boolean,default:false},
-    verificationCode:{type:Number,default:0},
+    verificationCode:{type:String},
     signupMethod:{
         type:String,
         enum:["manual","google"]   
