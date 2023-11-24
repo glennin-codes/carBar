@@ -8,12 +8,12 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-router.get('/',(req,res)=>{
+router.get('/api',(req,res)=>{
     res.send("api working succesful!")
   });
-  router.post('/auth/signup',registerUser)
-router.post('/auth/login',loginUser);
-  router.route('/properties').post(upload.array('images[]', 10),addCars);
+  router.post('/api/auth/signup',registerUser)
+router.post('/api/auth/login',loginUser);
+  router.route('/api/properties').post(upload.array('images[]', 10),addCars);
 
 
 
