@@ -3,7 +3,7 @@ import Car from "../../models/Car.js";
 import { clearMemory } from "../../utils/ClearMemory.js";
 import { Request, Response } from "express";
 import processAndUploadImage from "../../utils/imageUtil.js";
-i
+
 
 const addCars = async (req: Request, res:Response) => {
 try {
