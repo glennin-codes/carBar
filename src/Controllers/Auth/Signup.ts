@@ -14,7 +14,7 @@ const generateAuthToken = (userId:Types.ObjectId, email: string,name: string) =>
     );
   };
 
-export const registerOwner = async (req:Request, res:Response) => {
+export const registerUser = async (req:Request, res:Response) => {
   try {
     if (req.body.googleUserData) {
       console.log(req.body.googleUserData);
@@ -25,9 +25,9 @@ export const registerOwner = async (req:Request, res:Response) => {
         photoURL,
         email,} = req.body.googleUserData;
 
-      const ownerExist = await User.findOne({ email: email });
+      const UserExist = await User.findOne({ email: email });
 
-      if (ownerExist) {
+      if (UserExist) {
         return res.status(409).json({ error: "Email already exists" });
       }
 
@@ -53,9 +53,9 @@ const name=`${user.firstName } ${user.lastName}`;
       const { firstName,lastName, email, password, phone,location} =
         req.body;
 
-      const existingOwner = await User.findOne({ email: email });
+      const existingUser = await User.findOne({ email: email });
 
-      if (existingOwner) {
+      if (existingUser) {
         return res.status(409).json({ error: "Email already exists" });
       }
 

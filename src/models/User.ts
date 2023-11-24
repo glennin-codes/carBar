@@ -32,7 +32,7 @@ const userSchema = new Schema <Iuser>({
     verificationCode:{type:Number,default:0},
     signupMethod:{
         type:String,
-        enum:["manual","google"],   
+        enum:["manual","google"]   
     }
 
     

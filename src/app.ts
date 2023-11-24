@@ -7,7 +7,6 @@ import express, {
 } from "express";
 import { config } from "dotenv";
 import createHttpError from "http-errors";
-import createError from "http-errors";
 import connectToDatabase from "./db/connect.js";
 import router from "./routes/index.js";
 

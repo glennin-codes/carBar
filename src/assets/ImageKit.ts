@@ -7,10 +7,10 @@ interface IImagekitconfig{
     urlEndpoint:string;
 }
 const imagekitconfig:IImagekitconfig={
-        publicKey: process.env.publicKey || '',
-    privateKey: process.env.privateKey || '',
-    urlEndpoint:"https://ik.imagekit.io/hcmhqwy2h" || ''
+        publicKey: process.env.IMAGEKIT_PUBLIC_KEY || '',
+    privateKey: process.env.IMAGEKIT_PRIVATE_KEY || '',
+    urlEndpoint:process.env.IMAGEKIT_URL || ''
 
 }
 
-export  const imagekit=new ImageKit(imagekitconfig);
+export  const imagekit= new ImageKit(imagekitconfig);
