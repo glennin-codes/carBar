@@ -14,6 +14,9 @@ interface Iuser extends Document {
         type: Date;
         default: Date;
     };
+    isVerified:boolean;
+    verificationCode:number;
+    signupMethod:string;
 }
 
 
@@ -25,6 +28,13 @@ const userSchema = new Schema <Iuser>({
     phoneNumber:{type:String,},
     location:{type:String,required:true},
     createdAt:{type:Date,default:Date.now},
+    isVerified:{type:Boolean,default:false},
+    verificationCode:{type:Number,default:0},
+    signupMethod:{
+        type:String,
+        enum:["manual","google"],   
+    }
+
     
 });
  const User = mongoose.model<Iuser>("Users",userSchema);
