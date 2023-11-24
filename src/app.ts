@@ -9,6 +9,7 @@ import { config } from "dotenv";
 import createHttpError from "http-errors";
 import createError from "http-errors";
 import connectToDatabase from "./db/connect.js";
+import router from "./routes/index.js";
 
 config();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("car hub api");
 });
+app.use(router);
 app.use("*", (req: Request, res: Response, next: NextFunction) => {
   // Simulate a 404 error
   next(

@@ -1,23 +1,27 @@
 
 import Car from "../../models/Car.js";
 import { clearMemory } from "../../utils/ClearMemory.js";
-import { Response } from "express";
+import { Request, Response } from "express";
 import processAndUploadImage from "../../utils/imageUtil.js";
+i
 
-const addProperties = async (req: { files: any[]; body: {   modelName: string; yearOfManufacture:string; mileage: number; color:string; location: string; engineSize: any; transmissionType: string; fuelType: string; usedOrigin: string; description: string; id: any; price: number; }; }, res:Response) => {
+const addCars = async (req: Request, res:Response) => {
 try {
   
-  console.log("files",req.files );
-    // Process and store images using ImageKit
-    const imagePromises = req.files.map(async (photo: { buffer: any; originalname: any; }) => {
-      const { buffer, originalname } = photo;
-  console.log('buffer', buffer );
-      return await processAndUploadImage(buffer,originalname);
-    });
-    console.log('length',imagePromises)
+  console.log("files", req.files);
+  // Process and store images using ImageKit
+  const imagePromises = Array.isArray(req.files)
+    ? req.files.map(async (image: { buffer: any; originalname: any }) => {
+        const { buffer, originalname } =image;
+        console.log('buffer', buffer);
+        return await processAndUploadImage(buffer, originalname);
+      })
+    : [];
+    
+  console.log('length', imagePromises)
 
-    const processedImages = await Promise.all(imagePromises);
-    console.log("imagesUrl processed ", processedImages );
+  const processedImages = await Promise.all(imagePromises);
+  console.log("imagesUrl processed ", processedImages);
 
   
   
@@ -55,5 +59,5 @@ try {
   }
 };
 
-export default addProperties;
+export default addCars;
 
