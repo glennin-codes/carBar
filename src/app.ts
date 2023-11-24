@@ -9,12 +9,15 @@ import { config } from "dotenv";
 import createHttpError from "http-errors";
 import connectToDatabase from "./db/connect.js";
 import router from "./routes/index.js";
+import logger from 'morgan';
 
 config();
 
 const app: Application = express();
 const port: number = Number(process.env.Port) || 8080;
 
+app.use(logger("dev"));
+app.use(logger(':method :url :status :res[content-length] - :response-time ms :user-agent'));
 //middlewares
 app.use(express.json());
 
@@ -31,6 +34,7 @@ app.use("*", (req: Request, res: Response, next: NextFunction) => {
   );
 });
 
+
 const handleErrors: ErrorRequestHandler = (
   err: any,
   req: Request,
@@ -40,7 +44,7 @@ const handleErrors: ErrorRequestHandler = (
   console.error(err.stack);
   res
     .status(err.status || 500)
-    .send({ error: err.message || "something went wrong" });
+    .json({ error: err.message || "something went wrong" });
 };
 app.use(handleErrors);
 
