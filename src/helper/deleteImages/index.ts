@@ -1,6 +1,6 @@
 import { imagekit } from "../../assets/ImageKit.js";
 
-async function deleteimagesFromImageKit(fileIds:any) {
+async function deleteImagesFromImageKit(fileIds:any) {
    if(fileIds && fileIds.length>0){
     for (const fileId of fileIds) {
       try {
@@ -22,4 +22,4 @@ async function deleteimagesFromImageKit(fileIds:any) {
    }
   }
   
-  export default deleteimagesFromImageKit;
+  export default deleteImagesFromImageKit;

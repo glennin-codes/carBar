@@ -28,7 +28,7 @@ try {
     
 
     
-    // Prepare property data
+    // Prepare car data
     const CarData = {
         modelName: req.body.modelName,
         yearOfManufacture: req.body.yearOfManufacture,

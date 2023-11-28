@@ -10,6 +10,7 @@ import AuthenticateToken from "../middlwares/AuthMiddleware.js";
 import deleteUser from "../Controllers/Users/deleteUser.js";
 import { GetAllCars } from "../Controllers/Cars/GetAllCars.js";
 import { GetSingleCar } from "../Controllers/Cars/GetSingleCar.js";
+import { UpdateCar } from "../Controllers/Cars/UpdateCar.js";
 
 const router = express.Router();
 const storage = multer.memoryStorage();
@@ -23,6 +24,6 @@ router.post("/api/auth/login", loginUser);
 router.route('/api/users/').get(getAllUsers);
 router.route('/api/users/:id').get(getSingleUser).patch(AuthenticateToken,UpdateUser).delete(AuthenticateToken,deleteUser)
 router.route("/api/cars").post(upload.array("images[]", 10), addCars).get(GetAllCars);
-router.route("/api/cars/:id").get(GetSingleCar);
+router.route("/api/cars/:id").get(GetSingleCar).patch(UpdateCar);
 
 export default router;

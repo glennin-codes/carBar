@@ -3,7 +3,7 @@
 import { Request, Response } from "express";
 import Car from "../../models/Car.js";
 import User from "../../models/User.js";
-import deleteimagesFromImageKit from "../../helper/deleteImages/index.js";
+import deleteImagesFromImageKit from "../../helper/deleteImages/index.js";
 
 // Delete user by ID
 const deleteUser = async (req:Request, res:Response) => {
@@ -27,7 +27,7 @@ const deleteUser = async (req:Request, res:Response) => {
              .filter(image => image && image.id) // Filter out null or empty images
              .map(image => image.id);
            if (imageIds.length > 0) {
-             await deleteimagesFromImageKit(imageIds);
+             await deleteImagesFromImageKit(imageIds);
            }
          }
          await Car.deleteOne({ _id: car._id });
