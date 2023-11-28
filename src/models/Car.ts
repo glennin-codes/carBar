@@ -21,7 +21,7 @@ interface ICar extends Document {
     owner:Types.ObjectId;
     createdAt: Date;
     verified:boolean;
-    price:number;
+    price:string;
 }
   
 
@@ -40,7 +40,7 @@ const carSchema = new Schema<ICar>({
         thumbnailUrl:String
       }]
       , default: [] },
-      price:{type:Number},
+      price:{type:String},
     engineSize: { type: String, required: true },
     transmissionType: { type: String, required: true },
     fuelType: { type: String, required: true },
