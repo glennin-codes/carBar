@@ -1,7 +1,12 @@
 
 import mongoose, { Document, Schema } from "mongoose";
 
-
+interface IImage {
+    id: string;
+    url: string;
+    title: string;
+    thumbnailUrl: string;
+}  
 
 interface Iuser extends Document {
     email: string;
@@ -17,8 +22,9 @@ interface Iuser extends Document {
     isVerified:boolean;
     verificationCode:string;
     signupMethod:string;
+    coverPhoto: IImage;
+    profilePhoto:IImage;
 }
-
 
 const userSchema = new Schema <Iuser>({
     email:{type:String,required:true},
@@ -26,7 +32,20 @@ const userSchema = new Schema <Iuser>({
     firstName:{type:String,required:true},
     lastName:{type:String,},
     phoneNumber:{type:String,},
-    location:{type:String,required:true},
+    location:{type:String,},
+    coverPhoto: { type:  {
+        id: String,
+        url: String,
+        title: String,
+        thumbnailUrl:String
+    }},
+    profilePhoto:{ type:  {
+        id: String,
+        url: String,
+        title: String,
+        thumbnailUrl:String
+       }},
+
     createdAt:{type:Date,default:Date.now},
     isVerified:{type:Boolean,default:false},
     verificationCode:{type:String},

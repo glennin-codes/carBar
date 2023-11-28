@@ -22,6 +22,7 @@ export const registerUser = async (req:Request, res:Response) => {
       // const googleSignupID = req.body.googleSignupID;
       // const decodedToken = await admin.auth().verifyIdToken(googleSignupID);
       const {    displayName,
+        
         photoURL,
         email,} = req.body.googleUserData;
 
@@ -30,15 +31,23 @@ export const registerUser = async (req:Request, res:Response) => {
       if (UserExist) {
         return res.status(409).json({ error: "Email already exists" });
       }
+      const [firstName, lastName] = displayName.split(" ");
 
       const user = new User({
-        name: displayName,
+        firstName,
+        lastName,
         email: email,
-        photo:photoURL?photoURL:"",
+        profilePhoto: {
+          id: "",  
+          url: photoURL || "",
+          title: firstName,
+          thumbnailUrl: "",
+        },
         password: null,
         signupMethod: "google",
         isVerified: true,
-        verificationCode:null
+        verificationCode:null,
+        
       });
 
       await user.save();

@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import User from "../../models/User.js";
 import bcrypt from 'bcrypt';
+import processAndUploadImage from "../../utils/imageUtil.js";
+import deleteImagesFromImageKit from "../../helper/deleteImages/index.js";
 // Update user by ID with PATCH method
 const UpdateUser = async (req:Request, res:Response) => {
   const { id } = req.params;
-  const { firstName, lastName ,email, phoneNumber, location,isVerified,verificationCode ,password } = req.body;
+  const { firstName, lastName ,email, phoneNumber, location,isVerified,verificationCode ,password ,imageId} = req.body;
 
   try {
     const user = await User.findById(id);
@@ -25,9 +27,19 @@ if(password){
     if (verificationCode) user.verificationCode = verificationCode;
     // if (longitude) user.longitude = longitude;
     // if (latitude) user.latitude = latitude;
+const photo:any =req.file;
+if(photo){
+  const { buffer, originalname } = photo;
+  const uploadResult = await processAndUploadImage(buffer, originalname);
+  user.profilePhoto=uploadResult;
 
+    
+}
+if(imageId){
+  await deleteImagesFromImageKit(imageId);
+} 
     const updatedUser = await user.save();
-
+  
     res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error);
