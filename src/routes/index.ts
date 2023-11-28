@@ -11,6 +11,8 @@ import deleteUser from "../Controllers/Users/deleteUser.js";
 import { GetAllCars } from "../Controllers/Cars/GetAllCars.js";
 import { GetSingleCar } from "../Controllers/Cars/GetSingleCar.js";
 import { UpdateCar } from "../Controllers/Cars/UpdateCar.js";
+import { deleteCar } from "../Controllers/Cars/deleteCar.js";
+import { UpdateCoverPhoto } from "../Controllers/Users/updateCoverPhoto.js";
 
 const router = express.Router();
 const storage = multer.memoryStorage();
@@ -22,8 +24,9 @@ router.get("/api", (req:Request, res:Response) => {
 router.post("/api/auth/signup", registerUser);
 router.post("/api/auth/login", loginUser);
 router.route('/api/users/').get(getAllUsers);
+router.route('/api/user/coverPhoto').patch(upload.single('photo'),UpdateCoverPhoto);
 router.route('/api/users/:id').get(getSingleUser).patch(AuthenticateToken,upload.single('photo'),UpdateUser).delete(AuthenticateToken,deleteUser)
 router.route("/api/cars").post(upload.array("images[]", 10), addCars).get(GetAllCars);
-router.route("/api/cars/:id").get(GetSingleCar).patch(UpdateCar);
+router.route("/api/cars/:id").get(GetSingleCar).patch(UpdateCar).delete(deleteCar);
 
 export default router;
